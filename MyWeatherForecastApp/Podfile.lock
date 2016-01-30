@@ -1,0 +1,25 @@
+PODS:
+  - Alamofire (3.1.5)
+  - ForecastIO (1.5.0)
+  - GoogleMaps (1.11.1)
+  - Kingfisher (2.0.0)
+  - KVNProgress (2.2.2)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.0)
+  - ForecastIO
+  - GoogleMaps
+  - Kingfisher (~> 2.0)
+  - KVNProgress
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
+  ForecastIO: b6b3e26e7134acf8a05388cc513a9e7eb18846b7
+  GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
+  Kingfisher: 67d280b39e878afbd467c80953924a61950c45e4
+  KVNProgress: 4697347e21e37fdaa5264ebc24e377c205a50328
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+COCOAPODS: 0.39.0
