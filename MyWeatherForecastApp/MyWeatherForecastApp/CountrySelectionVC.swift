@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import KVNProgress
 
 
@@ -17,43 +15,38 @@ class CountrySelectionVC: UITableViewController {
     
     @IBOutlet var tableCountries: UITableView!
     
-    // Countries Data [Name: [latitude: longitude]]
-    var countryList: [JSON]? = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         do {
-            
-            // Mostramos un alert de progreso
-            KVNProgress.showWithStatus("Getting countries...")
-            
-            // Solicitamos la info del area geografica actual a partir de la ubicacion actual
-            Alamofire.request(.GET, "https://restcountries.eu/rest/v1/all")
-                .responseString { response in
+            // SI es necesario descargar las ciudades y paises
+            if Model.instance.allCountries.count == 0 || Model.instance.allCities.count == 0 {
+                
+                // Mostramos un alert de progreso
+                KVNProgress.showWithStatus("Getting countries...")
+                
+                // Obtenemos la lista completa de paises y ciudades
+                ApiAccessController.getAllCountriesAndCities({
+                    (countries, cities) -> () in
                     
-                    // Si el request fue exitoso
-                    if response.result.isSuccess {
-                        
-                        // Convertimos el string en un arbol JSON
-                        let jsonTree = SwiftyJSON.JSON.parse(response.result.value!)
-                        
-                        // Guardamos la lista de paises
-                        self.countryList = jsonTree.array!
-                        
-                        // Actualizamos la tabla
-                        self.tableCountries.reloadData()
-                        
-                    }else{
-                        
-                        //  Uh-oh we have an error!
-                        //print("Countries: \(response.result.error!)")
-                    }
+                    // Guardamos los datos
+                    Model.instance.allCountries = countries
+                    Model.instance.allCities = cities
+                    
+                    // Actualizamos la tabla
+                    self.tableCountries.reloadData()
                     
                     // Cerramos el alert de progreso
                     KVNProgress.dismiss()
+                    
+                    }, callbackError: { (error) -> () in
+                        
+                        // Cerramos el alert de progreso
+                        KVNProgress.dismiss()
+                })
             }
         }catch{
+            
             // Cerramos el alert de progreso
             KVNProgress.dismiss()
         }
@@ -61,11 +54,7 @@ class CountrySelectionVC: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if countryList == nil {
-            return 0
-        }else {
-            return countryList!.count
-        }
+        return Model.instance.allCountries.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -74,7 +63,7 @@ class CountrySelectionVC: UITableViewController {
         let currentCell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cellCountry")!
         
         // Colomamos el nombre del pais en la celda
-        currentCell.textLabel?.text = countryList![indexPath.row]["name"].string
+        currentCell.textLabel?.text = Model.instance.allCountries[indexPath.row]
         
         // Retornamos la celda ya configurada
         return currentCell
@@ -83,16 +72,10 @@ class CountrySelectionVC: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
         // Obtenemos los datos del pais seleccionado
-        let name: String = countryList![indexPath.row]["name"].string!
-        let latitude: String = String(countryList![indexPath.row]["latlng"][0].double!) // Lat
-        let longitude: String = String(countryList![indexPath.row]["latlng"][1].double!) // Long
+        let name: String = Model.instance.allCountries[indexPath.row]
         
         // Guardamos la data del pais seleccionado
-        let country = Country(name: name, longitude: longitude, latitude: latitude)
-        Model.instance.setSelectedCountry(country)
-        
-        // Quitamos la pantalla actual
-        self.navigationController?.popViewControllerAnimated(true)
+        Model.instance.setSelectedCountry(name, citiesFromCountry: Model.instance.allCities[indexPath.row])
     }
     
 }

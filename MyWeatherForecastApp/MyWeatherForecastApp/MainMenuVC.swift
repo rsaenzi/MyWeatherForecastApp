@@ -39,7 +39,7 @@ class MainMenuVC: UIViewController {
     @IBAction func onClickTravel(sender: UIButton, forEvent event: UIEvent) {
         
         // Limpiamos cualquier seleccion previa
-        Model.instance.clearSelectedCountries()
+        Model.instance.clearSelection()
     }
     
     

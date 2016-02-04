@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BrT-o0-cYo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BrT-o0-cYo">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -425,6 +425,45 @@ To Travel</string>
             </objects>
             <point key="canvasLocation" x="1380.5" y="393.5"/>
         </scene>
+        <!--City SelectionVC-->
+        <scene sceneID="CeP-Yj-To5">
+            <objects>
+                <tableViewController id="dMz-p4-1gq" customClass="CitySelectionVC" customModule="MyWeatherForecastApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aJq-1X-uvg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.36375509833278619" blue="0.32345607918226016" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellCity" textLabel="GYx-0h-ovn" style="IBUITableViewCellStyleDefault" id="DKZ-1b-alJ">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DKZ-1b-alJ" id="YTe-K9-ud5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GYx-0h-ovn">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.36375509833278619" blue="0.32345607918226016" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dMz-p4-1gq" id="LbI-uy-S3G"/>
+                            <outlet property="delegate" destination="dMz-p4-1gq" id="GhZ-W6-rCe"/>
+                        </connections>
+                    </tableView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kcn-Gd-eZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380.5" y="2061.5"/>
+        </scene>
         <!--Country SelectionVC-->
         <scene sceneID="6oN-mq-iNn">
             <objects>
@@ -451,6 +490,9 @@ To Travel</string>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="0.68627452850000004" blue="0.058823529630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="dMz-p4-1gq" kind="show" id="JHc-di-PkG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -465,7 +507,7 @@ To Travel</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dY0-Xp-mt3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380.5" y="1145.5"/>
+            <point key="canvasLocation" x="1380.5" y="1230.5"/>
         </scene>
         <!--Show MapVC-->
         <scene sceneID="tda-IZ-H6B">
@@ -519,10 +561,10 @@ To Travel</string>
             </objects>
             <point key="canvasLocation" x="1846.5" y="393.5"/>
         </scene>
-        <!--Map WheatherVC-->
+        <!--Map WeatherVC-->
         <scene sceneID="DOs-HW-RHl">
             <objects>
-                <viewController storyboardIdentifier="ShowMapWheather" id="5ZK-f5-hpq" customClass="MapWheatherVC" customModule="MyWeatherForecastApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowMapWheather" id="5ZK-f5-hpq" customClass="MapWeatherVC" customModule="MyWeatherForecastApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mp0-yL-oRS"/>
                         <viewControllerLayoutGuide type="bottom" id="NFI-Ep-xXj"/>
@@ -583,19 +625,19 @@ To Travel</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="labelCountry" destination="Nvi-qu-0aD" id="VCY-by-a71"/>
-                        <outlet property="labelDescription" destination="XfV-9r-uqM" id="afP-WL-pjS"/>
-                        <outlet property="labelTemperature" destination="mHl-oU-8ql" id="p0d-Xf-t01"/>
+                        <outlet property="labelCountry" destination="Nvi-qu-0aD" id="xTE-bI-JHi"/>
+                        <outlet property="labelDescription" destination="XfV-9r-uqM" id="bJc-CL-R2a"/>
+                        <outlet property="labelTemperature" destination="mHl-oU-8ql" id="KnA-5n-bN5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="htB-83-adm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1846.5" y="1145.5"/>
+            <point key="canvasLocation" x="1846.5" y="1230.5"/>
         </scene>
-        <!--Show WheatherVC-->
+        <!--Show WeatherVC-->
         <scene sceneID="B2O-Z9-i49">
             <objects>
-                <viewController storyboardIdentifier="ShowWheather" modalTransitionStyle="partialCurl" id="dul-Kn-nKO" customClass="ShowWheatherVC" customModule="MyWeatherForecastApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowWheather" modalTransitionStyle="partialCurl" id="dul-Kn-nKO" customClass="ShowWeatherVC" customModule="MyWeatherForecastApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hVB-0N-Mu6"/>
                         <viewControllerLayoutGuide type="bottom" id="oUf-TJ-ivI"/>
@@ -656,9 +698,9 @@ To Travel</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="labelCountry" destination="Ygb-Ix-4E4" id="HFO-P5-Qcn"/>
-                        <outlet property="labelDescription" destination="3D2-y5-KjB" id="PmC-QT-JHH"/>
-                        <outlet property="labelTemperature" destination="FiN-bX-0bi" id="Uj2-Lj-gMC"/>
+                        <outlet property="labelCountry" destination="Ygb-Ix-4E4" id="Yke-YP-3qq"/>
+                        <outlet property="labelDescription" destination="3D2-y5-KjB" id="s7b-x9-bYu"/>
+                        <outlet property="labelTemperature" destination="FiN-bX-0bi" id="dkL-7t-2pD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hbR-AD-dJK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -707,6 +749,6 @@ To Travel</string>
         <image name="Travel2" width="1004" height="896"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pNm-Fq-IfJ"/>
+        <segue reference="NNw-K0-e4I"/>
     </inferredMetricsTieBreakers>
 </document>

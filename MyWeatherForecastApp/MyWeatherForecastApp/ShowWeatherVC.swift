@@ -1,5 +1,5 @@
 //
-//  ShowWheatherVC.swift
+//  ShowWeatherVC.swift
 //  MyWeatherForecastApp
 //
 //  Created by Rigoberto Sáenz Imbacuán on 1/27/16.
@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import ForecastIO
 import KVNProgress
 import CoreLocation
 
 
-class ShowWheatherVC: UIViewController, CLLocationManagerDelegate {
+class ShowWeatherVC: UIViewController, CLLocationManagerDelegate {
     
     // Managers
     private var locationManager = CLLocationManager()
@@ -129,38 +127,29 @@ class ShowWheatherVC: UIViewController, CLLocationManagerDelegate {
         
         do{
             
-            // Creamos los parametros para el request
-            let parameters = [
-                "latlng": "\(currentLatitude!),\(currentLongitude!)",
-                "sensor": "true"
-            ]
-            
             // Solicitamos la info del area geografica actual a partir de la ubicacion actual
-            Alamofire.request(.GET, "http://maps.googleapis.com/maps/api/geocode/json", parameters: parameters)
-                .responseString { response in
+            ApiAccessController.requestLocationNameFromCoordinates(currentLatitude!, currentLongitude: currentLongitude!,
+                callbackSuccess: { (jsonTree) -> () in
                     
-                    // Si el request fue exitoso
-                    if response.result.isSuccess {
+                    // Ejecutamos en el thread que maneja la UI
+                    dispatch_async(dispatch_get_main_queue(),{
                         
-                        // Convertimos el string en un arbol JSON
-                        let jsonTree = SwiftyJSON.JSON.parse(response.result.value!)
-                        
-                        // Ejecutamos en el thread que maneja la UI
-                        dispatch_async(dispatch_get_main_queue(),{
-                            
-                            // Mostramos el pais y la ciudad
-                            self.labelCountry.text = jsonTree["results"][1]["formatted_address"].string
-                        })
-                        
-                    }else{
-                        
-                        //  Uh-oh we have an error!
-                        //print("Geocoding: \(response.result.error!)")
-                    }
+                        // Mostramos el pais y la ciudad
+                        self.labelCountry.text = jsonTree["results"][1]["formatted_address"].string
+                    })
                     
                     // Cerramos el alert de progreso
                     KVNProgress.dismiss()
-            }
+                    
+                }, callbackError: { (error) -> () in
+                    
+                    // Informamos sobre el error
+                    print(error)
+                    
+                    // Cerramos el alert de progreso
+                    KVNProgress.dismiss()
+            })
+            
         }catch{
             
             // Cerramos el alert de progreso

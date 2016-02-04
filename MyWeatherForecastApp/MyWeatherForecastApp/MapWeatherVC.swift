@@ -1,5 +1,5 @@
 //
-//  MapWheatherVC.swift
+//  MapWeatherVC.swift
 //  MyWeatherForecastApp
 //
 //  Created by Rigoberto Sáenz Imbacuán on 1/28/16.
@@ -13,7 +13,7 @@ import ForecastIO
 import KVNProgress
 import CoreLocation
 
-class MapWheatherVC: UIViewController {
+class MapWeatherVC: UIViewController {
     
     // Managers
     private let forecastIOClient = APIClient(apiKey: "c617b4ec377c53f3fac8ca7018526435")

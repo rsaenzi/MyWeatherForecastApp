@@ -23,46 +23,80 @@ class Model {
     // Country Selection
     // ---------------------------------------------
     
-    private var countryToSet: OrderSelection = .FirstCountry
+    var allCountries: [String] = []
+    var allCities: [Array<String>] = []
     
-    // [name : [latitude : longitud]]
-    private var firstSelectedCountry:  Country? = nil
-    private var secondSelectedCountry: Country? = nil
+    private var countryToSet: OrderSelection?
     
-    func clearSelectedCountries(){
-        print("clean")
+    private var firstSelectedCountry:  String? = nil
+    private var secondSelectedCountry: String? = nil
+    private var firstSelectedCity:  String? = nil
+    private var secondSelectedCity: String? = nil
+    
+    private var citiesArray: Array<String>? = nil
+    
+    func clearSelection(){
+        countryToSet = nil
+        
         firstSelectedCountry = nil
         secondSelectedCountry = nil
+        firstSelectedCity = nil
+        secondSelectedCity = nil
+        
+        citiesArray = nil
     }
     
-    func countryToSetAfter(country: OrderSelection){
+    
+    func getCountryPointerForSelection() -> OrderSelection? {
+        return countryToSet
+    }
+    func setCountryPointerForSelection(country: OrderSelection){
         countryToSet = country
     }
     
-    func setSelectedCountry(countrySet: Country){
+    
+    func setSelectedCountry(countrySet: String, citiesFromCountry: Array<String>){
         if countryToSet == .FirstCountry {
             firstSelectedCountry = countrySet
         }else{
             secondSelectedCountry = countrySet
         }
+        citiesArray = citiesFromCountry
+    }
+    func setSelectedCity(cityToSet: String) {
+        if countryToSet == .FirstCountry {
+            firstSelectedCity = cityToSet
+        }else{
+            secondSelectedCity = cityToSet
+        }
     }
     
-    func getSelectedCountry(selection: OrderSelection) -> Country? {
+    
+    func getSelectedCountryCities() -> Array<String>? {
+        return citiesArray
+    }
+    func getSelectedCountry(selection: OrderSelection) -> String? {
         if selection == .FirstCountry {
             return firstSelectedCountry
         }else{
             return secondSelectedCountry
         }
     }
+    func getSelectedCity(selection: OrderSelection) -> String? {
+        if selection == .FirstCountry {
+            return firstSelectedCity
+        }else{
+            return secondSelectedCity
+        }
+    }
     
     
     // ---------------------------------------------
-    // Map Coordinated
+    // Map Coordinates
     // ---------------------------------------------
     
     var mapLongitude: Double = 0.0
     var mapLatitude: Double = 0.0
-    
     
 }
 
